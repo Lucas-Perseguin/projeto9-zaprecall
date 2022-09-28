@@ -1,26 +1,24 @@
 function Marcador({ card }) {
-    if (card.Color === undefined){
-        return (
-            <ion-icon name='ellipse-outline' style={{ color: `#000000` }}></ion-icon>
-        )
-    }
-    let name = ""
+    let nome = 'ellipse-outline'
+    let color = '#000000'
     switch (card.Color) {
         case '#FF3030':
-            name = 'close-circle'
+            nome = 'close-circle'
+            color = '#FF3030'
             break;
         case '#FF922E':
-            name = 'help-circle'
+            nome = 'help-circle'
+            color = '#FF922E'
             break;
         case '#2FBE34':
-            name = 'checkmark-circle'
+            nome = 'checkmark-circle'
+            color = '#2FBE34'
             break;
         default:
-            name = 'ellipse-outline'
             break;
     }
     return (
-        <ion-icon name={name} style={{ color: `${card.Color}` }}></ion-icon>
+        <ion-icon name={nome} style={{ color: `#${color}` }}></ion-icon>
     )
 }
 

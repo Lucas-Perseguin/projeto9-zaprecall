@@ -1,6 +1,6 @@
-import { useState } from "react"
 import styled from "styled-components"
 import setinha from "./images/setinha.png"
+import { useState } from "react"
 
 const CartaFechada = styled.div`
     justify-content: space-around;
@@ -62,12 +62,31 @@ const Buttons = styled.div`
     }
 `
 
+function MarcadorCard({ color }) {
+    let nome = 'play-outline'
+    switch (color) {
+        case '#FF3030':
+            nome = 'close-circle'
+            break;
+        case '#FF922E':
+            nome = 'help-circle'
+            break;
+        case '#2FBE34':
+            nome = 'checkmark-circle'
+            break;
+        default:
+            break;
+    }
+    return (
+        <ion-icon name={nome} style={{ color: `${color}` }}></ion-icon>
+    )
+}
+
 function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
     const [cartaAberta, setCartaAberta] = useState(false)
     const [mostrarResposta, setMostrarResposta] = useState(false)
     const [respondido, setRespondido] = useState(false)
-    const [corReposta, setCorResposta] = useState("")
-    const [aux, setAux] = useState({ Color: null })
+    const [corReposta, setCorResposta] = useState('#000000')
 
     function responder(cor) {
         setCorResposta(cor)
@@ -75,12 +94,10 @@ function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
         setMostrarResposta(false)
         setCartaAberta(false)
         setContador(contador + 1)
-        let auxCard = { ...card, Color: { cor } }
+        let auxCard = { ...card, Color: cor }
         let auxDeck = [...deckJogo]
         auxDeck[index] = { ...auxCard }
         setDeckJogo(auxDeck)
-        let auxColor = { Color: { cor } }
-        setAux(auxColor)
     }
 
     return (
@@ -88,7 +105,7 @@ function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
             <CartaFechada style={cartaAberta ? { display: 'none' } : { display: 'flex' }}>
                 <h2 style={respondido ? { color: `${corReposta}`, textDecoration: 'line-through' } : { color: 'black' }}>Pergunta {index + 1}</h2>
                 <button onClick={() => setCartaAberta(true)} disabled={respondido}>
-                    <MarcadorCard card={{ Color: `${aux.Color}` }} />
+                    <MarcadorCard color={corReposta} />
                 </button>
             </CartaFechada>
             <CartaAberta style={cartaAberta ? { display: 'block' } : { display: 'none' }}>
@@ -106,32 +123,6 @@ function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
                 </div>
             </CartaAberta>
         </>
-    )
-}
-
-function MarcadorCard({card}) {
-    if (card.Color === null){
-        return (
-            <ion-icon name='play-outline' style={{ color: '#000000' }}></ion-icon>
-        )
-    }
-    let name = ""
-    switch (card.Color) {
-        case '#FF3030':
-            name = 'close-circle'
-            break;
-        case '#FF922E':
-            name = 'help-circle'
-            break;
-        case '#2FBE34':
-            name = 'checkmark-circle'
-            break;
-        default:
-            name = 'play-outline'
-            break;
-    }
-    return (
-        <ion-icon name={name} style={{ color: `${card.Color}` }}></ion-icon>
     )
 }
 
