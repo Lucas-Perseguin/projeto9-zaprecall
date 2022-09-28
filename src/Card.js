@@ -98,6 +98,7 @@ function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
         let auxDeck = [...deckJogo]
         auxDeck[index] = { ...auxCard }
         setDeckJogo(auxDeck)
+        console.log(auxDeck)
     }
 
     return (

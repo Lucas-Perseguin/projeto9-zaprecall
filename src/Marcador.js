@@ -18,7 +18,7 @@ function Marcador({ card }) {
             break;
     }
     return (
-        <ion-icon name={nome} style={{ color: `#${color}` }}></ion-icon>
+        <ion-icon name={nome} style={{ color: `${color}` }}></ion-icon>
     )
 }
 
