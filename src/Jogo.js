@@ -47,6 +47,8 @@ const Footer = styled.div`
     color: #000000;
     width: 100%;
     background-color: #FFFFFF;
+    font-size: 22px;
+    gap: 10px;
     ul{
         display: flex;
         justify-content: center;
@@ -54,8 +56,8 @@ const Footer = styled.div`
         gap: 6px;
         height: 30px;
         *{
-            height: 20px;
-            width: 20px;
+            height: 24px;
+            width: 24px;
         }
     }
 `
@@ -70,7 +72,7 @@ function Jogo({ telaInicial }) {
                     <img src={logoPequena} alt="Logo ZapRecall" />
                     <h1>ZapRecall</h1>
                 </Logo>
-                {deck.map((card, index) => <Card key={index} card={card} index={index} contador={contador} setContador={setContador} deckJogo={deckJogo} setDeckJogo={setDeckJogo} />)}
+                {deckJogo.map((card, index) => <Card key={index} card={card} index={index} contador={contador} setContador={setContador} deckJogo={deckJogo} setDeckJogo={setDeckJogo} />)}
             </Global>
             <Footer style={telaInicial ? { display: 'none' } : { display: 'flex' }}>
                 <h2>{contador}/{deck.length} CONCLUÍDOS</h2>
