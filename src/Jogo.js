@@ -28,16 +28,21 @@ const Global = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     background-color: #FB6B6B;
     gap: 25px;
+    padding-bottom: 200px;
+    overflow-y: scroll;
 `
 
 const Footer = styled.div`
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     height: 126px;
     color: #000000;
     width: 100%;
@@ -59,19 +64,21 @@ function Jogo({ telaInicial }) {
     const [contador, setContador] = useState(0)
     const [deckJogo, setDeckJogo] = useState(deck)
     return (
-        <Global style={telaInicial ? { display: 'none' } : { display: 'flex' }}>
-            <Logo>
-                <img src={logoPequena} alt="Logo ZapRecall" />
-                <h1>ZapRecall</h1>
-            </Logo>
-            {deck.map((card, index) => <Card key={index} card={card} index={index} contador={contador} setContador={setContador} deckJogo={deckJogo} setDeckJogo={setDeckJogo} />)}
-            <Footer>
+        <>
+            <Global style={telaInicial ? { display: 'none' } : { display: 'flex' }}>
+                <Logo>
+                    <img src={logoPequena} alt="Logo ZapRecall" />
+                    <h1>ZapRecall</h1>
+                </Logo>
+                {deck.map((card, index) => <Card key={index} card={card} index={index} contador={contador} setContador={setContador} deckJogo={deckJogo} setDeckJogo={setDeckJogo} />)}
+            </Global>
+            <Footer style={telaInicial ? { display: 'none' } : { display: 'flex' }}>
                 <h2>{contador}/{deck.length} CONCLUÍDOS</h2>
                 <ul>
                     {deckJogo.map((card, index) => <Marcador key={index} card={card} />)}
                 </ul>
             </Footer>
-        </Global>
+        </>
     )
 }
 

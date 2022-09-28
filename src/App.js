@@ -41,7 +41,10 @@ const TelaInicial = styled.div`
 const Global = styled.div`
   font-family: 'Recursive';
   font-style: normal;
-  height: 100vh;
+  height: 100%;
+  *{
+    flex-shrink: 0;
+  }
 `;
 
 function App() {
