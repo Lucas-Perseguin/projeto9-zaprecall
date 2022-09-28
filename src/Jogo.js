@@ -64,7 +64,7 @@ function Jogo({ telaInicial }) {
                 <img src={logoPequena} alt="Logo ZapRecall" />
                 <h1>ZapRecall</h1>
             </Logo>
-            {deck.map((card, index) => <Card key={index} card={card} index={index} contador={contador} setContador={setContador} deck={deckJogo} setDeck={setDeckJogo} />)}
+            {deck.map((card, index) => <Card key={index} card={card} index={index} contador={contador} setContador={setContador} deckJogo={deckJogo} setDeckJogo={setDeckJogo} />)}
             <Footer>
                 <h2>{contador}/{deck.length} CONCLUÍDOS</h2>
                 <ul>

@@ -63,7 +63,7 @@ const Buttons = styled.div`
     }
 `
 
-function Card({ card, index, contador, setContador, deck, setDeck }) {
+function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
     const [cartaAberta, setCartaAberta] = useState(false)
     const [mostrarResposta, setMostrarResposta] = useState(false)
     const [respondido, setRespondido] = useState(false)
@@ -75,10 +75,10 @@ function Card({ card, index, contador, setContador, deck, setDeck }) {
         setMostrarResposta(false)
         setCartaAberta(false)
         setContador(contador + 1)
-        let auxCard = { Q: card.Q, A: card.A, Color: { cor } }
-        let auxDeck = [...deck]
+        let auxCard = {...card, Color: { cor } }
+        let auxDeck = [...deckJogo]
         auxDeck[index] = { ...auxCard }
-        setDeck(auxDeck)
+        setDeckJogo(auxDeck)
     }
 
     return (

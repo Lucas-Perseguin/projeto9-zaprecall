@@ -10,9 +10,6 @@ function Marcador({ card }) {
         case '#2FBE34':
             name = 'checkmark-circle'
             break;
-        case undefined:
-            name = 'ellipse'
-            break;
         default:
             name = 'ellipse'
             break;
