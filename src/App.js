@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
+import styled from "styled-components"
+import logo from "./Images/logo.png"
+import Jogo from "./Jogo"
+
+const TelaInicial = styled.div`
+  display: ${telaInicial ? 'flex' : 'none'};
+  background: #FB6B6B;
+  border: 1px solid #DBDBDB;
+  img {
+    width: 136px;
+    height: 161px;
+  }
+  h1{
+    font-weight: 400;
+    font-size: 36px;
+    text-align: center;
+  }
+  button{
+    width: 246px;
+    height: 54px;
+    background: #FFFFFF;
+    border: 1px solid #D70900;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    line-height: 54px;
+  }
+`;
+
+const Global = styled.div`
+  font-family: 'Recursive';
+  font-style: normal;
+`;
 
 function App() {
+  const [telaInicial, setTelaInicial] = useState(true)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Global>
+      <TelaInicial>
+        <img src={logo} alt="Logo ZapReccal" />
+        <h1>ZapRecall</h1>
+        <button onClick={() => setTelaInicial(false)}>Iniciar Recall!</button>
+      </TelaInicial>
+      <Jogo />
+    </Global>
   );
 }
 
