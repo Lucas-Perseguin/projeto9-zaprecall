@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import play from "./images/play-outline-icon.svg"
 import setinha from "./images/setinha.png"
@@ -14,6 +14,12 @@ const CartaFechada = styled.div`
     img{
         width: 20px;
         height: 23px;
+    }
+    button{
+        border: none;
+        background: none;
+        height: 23px;
+        width: 20px;
     }
     h2{
         font-weight: 700;
@@ -57,38 +63,45 @@ const Buttons = styled.div`
     }
 `
 
-function Card({ card, index, contador, setContador }) {
+function Card({ card, index, contador, setContador, deck, setDeck }) {
     const [cartaAberta, setCartaAberta] = useState(false)
     const [mostrarResposta, setMostrarResposta] = useState(false)
     const [respondido, setRespondido] = useState(false)
     const [corReposta, setCorResposta] = useState("")
 
-    function responder(cor){
+    function responder(cor) {
         setCorResposta(cor)
         setRespondido(true)
         setMostrarResposta(false)
         setCartaAberta(false)
+        setContador(contador + 1)
+        let auxCard = { Q: card.Q, A: card.A, Color: { cor } }
+        let auxDeck = [...deck]
+        auxDeck[index] = { ...auxCard }
+        setDeck(auxDeck)
     }
 
-    return(
+    return (
         <>
-            <CartaFechada style={cartaAberta ? {display: 'none'} : {display: 'flex'}}>
-                <h2 style={respondido ? {color: {corReposta}} : {color: 'black'}}>Pergunta {index + 1}</h2>
-                <img src={play} alt="Botão para abrir pergunta" onClick={() => setCartaAberta(true)} />
+            <CartaFechada style={cartaAberta ? { display: 'none' } : { display: 'flex' }}>
+                <h2 style={respondido ? { color: `${corReposta}`, textDecoration: 'line-through' } : { color: 'black' }}>Pergunta {index + 1}</h2>
+                <button onClick={() => setCartaAberta(true)} disabled={respondido}>
+                    <img src={play} alt="Botão para abrir pergunta" />
+                </button>
             </CartaFechada>
-            <CartaAberta style={cartaAberta ? {display: 'block'} : {display: 'none'}}>
-                <pergunta style={mostrarResposta ? {display: 'none'} : {display: 'block'}}>    
+            <CartaAberta style={cartaAberta ? { display: 'block' } : { display: 'none' }}>
+                <div style={mostrarResposta ? { display: 'none' } : { display: 'block' }}>
                     <h2>{card.Q}</h2>
                     <img src={setinha} alt="Mostrar Resposta" onClick={() => setMostrarResposta(true)} />
-                </pergunta>
-                <resposta style={mostrarResposta ? {display: 'block'} : {display: 'none'}}>
+                </div>
+                <div style={mostrarResposta ? { display: 'block' } : { display: 'none' }}>
                     <h2>{card.A}</h2>
                     <Buttons>
-                        <button onClick={() => responder('#FF3030')} style={{backgroundColor: '#FF3030'}}>Não lembrei</button>
-                        <button onClick={() => responder('#FF922E')} style={{backgroundColor: '#FF922E'}}>Quase não lembrei</button>
-                        <button onClick={() => responder('#2FBE34')} style={{backgroundColor: '#2FBE34'}}>Zap!</button>
+                        <button onClick={() => responder('#FF3030')} style={{ backgroundColor: '#FF3030' }}>Não lembrei</button>
+                        <button onClick={() => responder('#FF922E')} style={{ backgroundColor: '#FF922E' }}>Quase não lembrei</button>
+                        <button onClick={() => responder('#2FBE34')} style={{ backgroundColor: '#2FBE34' }}>Zap!</button>
                     </Buttons>
-                </resposta>
+                </div>
             </CartaAberta>
         </>
     )
