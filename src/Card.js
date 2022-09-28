@@ -20,6 +20,14 @@ const CartaFechada = styled.div`
             height: 100%;
         }
     }
+    button:hover{
+        cursor: pointer;
+        background-color: lightgrey;
+    }
+    button:disabled{
+        cursor: default;
+        background: none;
+    }
     h2{
         font-weight: 700;
         font-size: 16px;
@@ -42,6 +50,9 @@ const CartaAberta = styled.div`
         bottom: 10px;
         right: 10px;
     }
+    img:hover{
+        cursor: pointer;
+    }
 `
 
 const Buttons = styled.div`
@@ -59,6 +70,10 @@ const Buttons = styled.div`
         width: 85.17px;
         height: 37.17px;
         border-radius: 5px;
+    }
+    button:hover{
+        text-decoration: underline;
+        cursor: pointer;
     }
 `
 
@@ -82,7 +97,7 @@ function MarcadorCard({ color }) {
     )
 }
 
-function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
+function Card({ card, index, contador, setContador, deckJogo, setDeckJogo, contadorCorretas, setContadorCorretas, meta }) {
     const [cartaAberta, setCartaAberta] = useState(false)
     const [mostrarResposta, setMostrarResposta] = useState(false)
     const [respondido, setRespondido] = useState(false)
@@ -99,6 +114,16 @@ function Card({ card, index, contador, setContador, deckJogo, setDeckJogo }) {
         auxDeck[index] = { ...auxCard }
         setDeckJogo(auxDeck)
         console.log(auxDeck)
+        if (cor === '#2FBE34') {
+            setContadorCorretas(contadorCorretas + 1)
+            if (contadorCorretas === meta - 1) {
+                alert('Parabens você concluiu sua meta de Zaps!!!')
+            }
+        }
+        if (contador === deckJogo.length - 1 && ((cor !== '#2FBE34' && contadorCorretas < meta) || (cor === '2FBE34' && contadorCorretas < meta - 1))){
+            alert('Puts! Não foi dessa vez\nMas continue tentando!!!')
+        }
+
     }
 
     return (

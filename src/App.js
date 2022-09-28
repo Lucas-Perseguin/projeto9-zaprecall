@@ -36,6 +36,19 @@ const TelaInicial = styled.div`
     line-height: 54px;
     color: #D70900;
   }
+  button:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    border: 2px solid #D70900;
+  }
+  input{
+    width: 246px;
+    height: 43px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+  }
 `;
 
 const Global = styled.div`
@@ -49,14 +62,16 @@ const Global = styled.div`
 
 function App() {
   const [telaInicial, setTelaInicial] = useState(true)
+  const [meta, setMeta] = useState(0)
   return (
     <Global>
       <TelaInicial style={telaInicial ? { display: 'flex' } : { display: 'none' }}>
         <img src={logo} alt="Logo ZapReccal" />
         <h1>ZapRecall</h1>
+        <input type="number" placeholder="Insira sua meta de Zaps!" onChange={(event) => setMeta(event.target.value)} />
         <button onClick={() => setTelaInicial(false)}>Iniciar Recall!</button>
       </TelaInicial>
-      <Jogo telaInicial={telaInicial} />
+      <Jogo telaInicial={telaInicial} meta={meta} />
     </Global>
   );
 }

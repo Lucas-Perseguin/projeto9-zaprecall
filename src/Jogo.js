@@ -62,9 +62,10 @@ const Footer = styled.div`
     }
 `
 
-function Jogo({ telaInicial }) {
+function Jogo({ telaInicial, meta }) {
     const [contador, setContador] = useState(0)
     const [deckJogo, setDeckJogo] = useState(deck)
+    const [contadorCorretas, setContadorCorretas] = useState(0)
     return (
         <>
             <Global style={telaInicial ? { display: 'none' } : { display: 'flex' }}>
@@ -72,7 +73,20 @@ function Jogo({ telaInicial }) {
                     <img src={logoPequena} alt="Logo ZapRecall" />
                     <h1>ZapRecall</h1>
                 </Logo>
-                {deck.map((card, index) => <Card key={index} card={card} index={index} contador={contador} setContador={setContador} deckJogo={deckJogo} setDeckJogo={setDeckJogo} />)}
+                {deck.map((card, index) => {
+                    return(
+                        <Card key={index}
+                            card={card}
+                            index={index}
+                            contador={contador}
+                            setContador={setContador}
+                            deckJogo={deckJogo}
+                            setDeckJogo={setDeckJogo}
+                            contadorCorretas={contadorCorretas}
+                            setContadorCorretas={setContadorCorretas}
+                            meta={meta} />
+                    )
+                })}
             </Global>
             <Footer style={telaInicial ? { display: 'none' } : { display: 'flex' }}>
                 <h2>{contador}/{deck.length} CONCLUÍDOS</h2>
