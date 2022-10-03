@@ -68,8 +68,8 @@ function App() {
       <TelaInicial style={telaInicial ? { display: 'flex' } : { display: 'none' }}>
         <img src={logo} alt="Logo ZapReccal" />
         <h1>ZapRecall</h1>
-        <input type="number" placeholder="Insira sua meta de Zaps!" onChange={(event) => setMeta(event.target.value)} />
-        <button onClick={() => setTelaInicial(false)}>Iniciar Recall!</button>
+        <input type="number" placeholder="Insira sua meta de Zaps!" onChange={(event) => setMeta(event.target.value)} data-identifier="goals-input"/>
+        <button onClick={() => setTelaInicial(false)} data-identifier="start-btn">Iniciar Recall!</button>
       </TelaInicial>
       <Jogo telaInicial={telaInicial} meta={meta} />
     </Global>

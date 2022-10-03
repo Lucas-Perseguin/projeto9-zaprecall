@@ -89,7 +89,7 @@ function Jogo({ telaInicial, meta }) {
                 })}
             </Global>
             <Footer style={telaInicial ? { display: 'none' } : { display: 'flex' }}>
-                <h2>{contador}/{deck.length} CONCLUÍDOS</h2>
+                <h2 data-identifier="flashcard-counter">{contador}/{deck.length} CONCLUÍDOS</h2>
                 <ul>
                     {deckJogo.map((card, index) => <Marcador key={index} card={card} />)}
                 </ul>

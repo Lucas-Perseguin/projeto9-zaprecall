@@ -93,7 +93,7 @@ function MarcadorCard({ color }) {
             break;
     }
     return (
-        <ion-icon name={nome} style={{ color: `${color}` }}></ion-icon>
+        <ion-icon name={nome} style={{ color: `${color}` }} data-identifier="flashcard-status"></ion-icon>
     )
 }
 
@@ -127,28 +127,28 @@ function Card({ card, index, contador, setContador, deckJogo, setDeckJogo, conta
     }
 
     return (
-        <>
-            <CartaFechada style={cartaAberta ? { display: 'none' } : { display: 'flex' }}>
+        <div className="flashcard" data-identifier="flashcard">
+            <CartaFechada style={cartaAberta ? { display: 'none' } : { display: 'flex' } } data-identifier="flashcard-index-item">
                 <h2 style={respondido ? { color: `${corReposta}`, textDecoration: 'line-through' } : { color: 'black' }}>Pergunta {index + 1}</h2>
-                <button onClick={() => setCartaAberta(true)} disabled={respondido}>
+                <button onClick={() => setCartaAberta(true)} disabled={respondido} data-identifier="flashcard-show-btn">
                     <MarcadorCard color={corReposta} />
                 </button>
             </CartaFechada>
             <CartaAberta style={cartaAberta ? { display: 'block' } : { display: 'none' }}>
                 <div style={mostrarResposta ? { display: 'none' } : { display: 'block' }}>
-                    <h2>{card.Q}</h2>
-                    <img src={setinha} alt="Mostrar Resposta" onClick={() => setMostrarResposta(true)} />
+                    <h2 data-identifier="flashcard-question">{card.Q}</h2>
+                    <img src={setinha} alt="Mostrar Resposta" onClick={() => setMostrarResposta(true)} data-identifier="flashcard-turn-btn"/>
                 </div>
                 <div style={mostrarResposta ? { display: 'block' } : { display: 'none' }}>
-                    <h2>{card.A}</h2>
+                    <h2 data-identifier="flashcard-answer">{card.A}</h2>
                     <Buttons>
-                        <button onClick={() => responder('#FF3030')} style={{ backgroundColor: '#FF3030' }}>Não lembrei</button>
-                        <button onClick={() => responder('#FF922E')} style={{ backgroundColor: '#FF922E' }}>Quase não lembrei</button>
-                        <button onClick={() => responder('#2FBE34')} style={{ backgroundColor: '#2FBE34' }}>Zap!</button>
+                        <button onClick={() => responder('#FF3030')} style={{ backgroundColor: '#FF3030' }} data-identifier="forgot-btn">Não lembrei</button>
+                        <button onClick={() => responder('#FF922E')} style={{ backgroundColor: '#FF922E' }} data-identifier="almost-forgot-btn">Quase não lembrei</button>
+                        <button onClick={() => responder('#2FBE34')} style={{ backgroundColor: '#2FBE34' }} data-identifier="zap-btn">Zap!</button>
                     </Buttons>
                 </div>
             </CartaAberta>
-        </>
+        </div>
     )
 }
 
